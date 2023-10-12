@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Allow: /archives/
+Allow: /tags/
+Allow: /categories/
+
+
+Disallow: /js/
+Disallow: /css/
+Disallow: /lib/
+
+Sitemap: https://clyfort.github.io/sitemap.xml
+Sitemap: https://clyfort.github.io/baidusitemap.xml
