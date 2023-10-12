@@ -5360,7 +5360,7 @@ html.is-animating .swup-progress-icon {
 .home-banner-container .content .description {
   width: 100vw;
   font-weight: 450;
-  font-size: 1.8rem;
+  font-size: 3.8rem;
   line-height: 1.2;
   text-align: center;
   color: var(--home-banner-text-color);
@@ -5372,15 +5372,15 @@ html.is-animating .swup-progress-icon {
   font-weight: 350;
 }
 .home-banner-container .content .description p i {
-  font-size: 1hexrem;
+  font-size: 1.8rem;
   font-style: normal;
 }
 .home-banner-container .content .description p span {
-  font-size: 1.05hexrem;
+  font-size: 1.89rem;
 }
 @media (max-width: 768px) {
   .home-banner-container .content .description {
-    font-size: 1.62rem;
+    font-size: 3.42rem;
   }
 }
 .home-banner-container .content .social-contacts {
