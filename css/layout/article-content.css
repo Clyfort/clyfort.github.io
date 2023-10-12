@@ -422,6 +422,7 @@
   .post-page-container .article-content-container .post-tags-box {
     margin-top: 1.2rem;
     font-size: 1rem;
+    flex-wrap: wrap;
   }
 }
 .post-page-container .article-content-container .post-tags-box .tag-item {
