@@ -11,3 +11,5 @@
 @media(max-width:480px){.inspector{width:230px;bottom:36px}.inspector .property-section{padding:14px}.inspector .inspector-header{padding:0 14px}.canvas-size{font-size:9px;white-space:nowrap}.canvas-ruler.vertical{width:12px}.canvas-ruler.horizontal{left:12px}}
 
 .file-options a{padding:13px;border-radius:7px;background:#f7f8f2;color:var(--ink);text-decoration:none;display:block}.file-options a:hover{background:var(--accent-soft)}
+
+#marqueeSelection{position:absolute;display:none;pointer-events:none;border:1px dashed #db7655;background:#db765522;z-index:6}.font-hint{font-size:9px;color:#a1a795;line-height:1.7;margin:8px 0}.selection-box.locked .rotation-stem{display:none}
