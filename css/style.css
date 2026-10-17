@@ -5384,6 +5384,14 @@ html.is-animating .swup-progress-icon {
   }
 }
 .home-banner-container .content .social-contacts {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  white-space: nowrap;
   position: absolute;
   bottom: 60px;
   font-size: 1.6rem;
@@ -5402,10 +5410,26 @@ html.is-animating .swup-progress-icon {
   }
 }
 .home-banner-container .content .social-contacts .social-contact-item {
-  margin-right: 20px;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  margin-right: 0;
   cursor: pointer;
   line-height: 2;
   color: #fff;
+}
+.home-banner-container .content .social-contacts .social-contact-item > a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 48px;
+}
+.home-banner-container .content .social-contacts .social-contact-item img {
+  display: block;
+  width: 28px;
+  height: 28px;
+  margin: 0;
 }
 .home-banner-container .content .social-contacts .social-contact-item:last-child {
   margin-right: 0;
