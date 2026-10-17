@@ -29,6 +29,7 @@ with ZipFile(output, 'w', ZIP_DEFLATED) as archive:
         'M 框选，Ctrl+A 全选，Shift+点击增减选择。文字输入框内 Ctrl+A 只选文字。\n'
         'R 区域清除：拖动框选后按 Delete，用当前背景色填充区域；可撤销，手机端可点击属性面板的填充按钮。\n'
         '背景颜色提供白色快捷选项。图片导入保留原始像素尺寸，文字框高度自动适配内容。\n'
+        '双击文字框内任意位置即可编辑文字；点击框外或按 Ctrl/⌘+Enter 完成。\n'
         '使用「文件 → 保存项目文件」备份 .figlyph 项目；也能打开旧版 .shiguang 文件。\n'
     ).encode())
 
