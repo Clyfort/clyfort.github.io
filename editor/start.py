@@ -1,4 +1,4 @@
-"""Run the downloaded Shiguang Studio locally with Python 3."""
+"""Run the downloaded Figlyph locally with Python 3."""
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -19,7 +19,7 @@ if __name__ == '__main__':
     if server is None:
         raise SystemExit('Ports 8000-8010 are busy. Close another local server and retry.')
     url = f'http://127.0.0.1:{port}/editor/'
-    print('Shiguang Studio:', url, '\nPress Ctrl+C to stop.')
+    print('Figlyph:', url, '\nPress Ctrl+C to stop.')
     Timer(0.7, lambda: webbrowser.open(url)).start()
     try:
         server.serve_forever()

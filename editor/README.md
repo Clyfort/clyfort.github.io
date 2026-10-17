@@ -1,4 +1,4 @@
-# 拾光 Studio
+# 图绎（Figlyph）
 
 无构建依赖的浏览器图片编辑器。入口 `/editor/`（`editor/index.html`）加载 `editor/editor.css` 和 `editor/editor.js`，复用仓库已有字体与风景图片；不依赖外部 API。
 
@@ -12,7 +12,7 @@ python3 -m http.server 8000 --bind 127.0.0.1 --directory /workspace/clyfort.gith
 
 ## 功能
 
-- 图形：矩形、圆角矩形、圆形、三角形、直线、箭头；填充、渐变、描边、圆角与阴影。
+- 图形：选择矩形、圆角矩形、圆形、三角形、直线或箭头工具后，在画布按住鼠标拖动确定位置与尺寸；Shift 等比绘制或限定线条角度，Esc 取消。支持反向拖动和斜向箭头；填充、渐变、描边、圆角与阴影。
 - 自由画笔：颜色、粗细，可作为独立图层移动与缩放。
 - 文字：高度根据实际字形和换行自动计算，角点拖动等比缩放文字；字体、字号、字重、斜体、下划线、删除线、行距、字距、段距、对齐；选中右侧文字内容中的片段可单独设置样式。
 - 字体导入：TTF、OTF、WOFF、WOFF2。字体内嵌保存到项目。
@@ -22,7 +22,7 @@ python3 -m http.server 8000 --bind 127.0.0.1 --directory /workspace/clyfort.gith
 - 系统字体：提供等线、微软雅黑选项，使用设备已安装的字体，未安装时回退到内置思源黑体；Satoshi 主要用于西文。支持自行导入字体文件。
 - 图层：顺序、显示、锁定、复制、删除；撤销与重做最多保留 60 个状态。
 - 画布：自定义尺寸、预设、背景色、缩放和平移。
-- 文件：PNG、JPG、WebP 导出，透明背景与分辨率选项；`.shiguang` 项目文件保存/打开。
+- 文件：PNG、JPG、WebP 导出，透明背景与分辨率选项；`.figlyph` 项目文件保存/打开，兼容旧版 `.shiguang` 文件。
 - 自动保存：浏览器 localStorage。存储空间不足会提示，重要作品请另存项目文件。
 
 所有编辑在浏览器本地进行，不会把图片上传到服务器。大图片、内嵌字体和长历史会占用内存；图片单文件上限 15 MB、字体 20 MB、画布单边最大 16384 像素、总面积最大 6400 万像素。导入的动画图片按静态帧绘制。
@@ -38,6 +38,9 @@ Ctrl/⌘ + Z 撤销、Shift + Z 重做、D 复制图层、S 保存项目；方�
 
 ```sh
 EDITOR_TEST_URL=http://127.0.0.1:8000/editor/ node editor/tests/regressions.cjs
+EDITOR_TEST_URL=http://127.0.0.1:8000/editor/ node editor/tests/shapes.cjs
 ```
 
 可用 `CHROMIUM_PATH` 指定浏览器路径。检查实际文字像素边界、换行和缩放、两种框选方式、多选操作、原图尺寸导入、导出尺寸和刷新恢复。
+
+运行 `python3 editor/package.py` 可重新生成 `editor/downloads/figlyph.zip`，并同步旧版下载链接。
