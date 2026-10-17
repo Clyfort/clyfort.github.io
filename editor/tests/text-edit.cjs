@@ -45,6 +45,9 @@ const assert = require('node:assert/strict');
     // Pixel regression: the old canvas glyphs must disappear behind the live editor.
     await page.locator('#newProject').click(); await page.locator('#confirmCanvas').click();
     await page.locator('[data-panel="elements"]').click(); await page.locator('[data-action="add-text"]').click();
+    const placement = await page.locator('#artboard').boundingBox();
+    await page.locator('#artboard').click({ position: { x: 120*placement.width/800, y: 380*placement.height/1000 } });
+    await page.locator('#inlineText').press('Control+Enter');
     const ink = (x = 0, y = 0, w = 800, h = 1000) => page.locator('#artboard').evaluate((c, [x, y, w, h]) => {
       const d = c.getContext('2d').getImageData(x, y, w, h).data;
       let count = 0; for (let i = 0; i < d.length; i += 4) if (d[i] < 240 || d[i+1] < 240 || d[i+2] < 240) count++;
@@ -66,8 +69,10 @@ const assert = require('node:assert/strict');
     document = await state(); single = document.layers[0]; await doubleClick(single);
     await page.locator('#inlineText').fill(''); await page.locator('#inlineText').press('Control+Enter');
     assert.equal(await ink(), 0, 'empty text does not restore the old content');
-    assert.equal((await state()).layers[0].text, '', 'autosave completes before reload');
-    await page.reload(); assert.equal((await state()).layers[0].text, ''); assert.equal(await ink(), 0);
+    assert.equal((await state()).layers.length, 0, 'empty text frame is deleted and autosaved');
+    await page.locator('#undo').click(); assert.equal((await state()).layers[0].text, '你好');
+    await page.locator('#redo').click(); assert.equal((await state()).layers.length, 0);
+    await page.reload(); assert.equal((await state()).layers.length, 0); assert.equal(await ink(), 0);
     assert.deepEqual(errors, []);
     console.log('PASS: built-in scenery removed; native double-click on text and blank text-frame space, text commit, history, zoom/pan, native selection, other-object selection, reload and pixel-verified removal of old glyphs during editing.');
   } finally { await browser.close(); }
