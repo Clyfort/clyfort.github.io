@@ -21,7 +21,8 @@ python3 -m http.server 8000 --bind 127.0.0.1 --directory /workspace/clyfort.gith
 - 多选：Ctrl/⌘ + A 选中所有可见且未锁定的元素；M 框选工具可从任意位置拖出选框，默认选中与框接触的元素，也可在工具栏切换为「完全包含」。选择工具也可从空白区域开始框选。Shift + 点击增减选择、Shift + 框选追加选择；所选元素可整体移动、复制、删除。文字输入框内的 Ctrl/⌘ + A 保持原生文字全选行为。
 - 系统字体：提供等线、微软雅黑选项，使用设备已安装的字体，未安装时回退到内置思源黑体；Satoshi 主要用于西文。支持自行导入字体文件。
 - 图层：顺序、显示、锁定、复制、删除；撤销与重做最多保留 60 个状态。
-- 画布：自定义尺寸、预设、背景色、缩放和平移。
+- 画布：自定义尺寸、预设、背景色、缩放和平移。元素面板、画布设置和区域清除面板均提供白色背景快捷选项。
+- 区域清除：按 R 或点击工具栏「区域清除」，拖出矩形选区，按 Delete/Backspace（或属性面板按钮）填充为当前背景色；支持撤销、重做、项目保存和导出，背景改色时已清除的区域同步更新。V/M 仍选择和删除完整元素，输入文字时 Delete 仍编辑文字。
 - 文件：PNG、JPG、WebP 导出，透明背景与分辨率选项；`.figlyph` 项目文件保存/打开，兼容旧版 `.shiguang` 文件。
 - 自动保存：浏览器 localStorage。存储空间不足会提示，重要作品请另存项目文件。
 
@@ -40,6 +41,7 @@ Ctrl/⌘ + Z 撤销、Shift + Z 重做、D 复制图层、S 保存项目；方�
 EDITOR_TEST_URL=http://127.0.0.1:8000/editor/ node editor/tests/regressions.cjs
 EDITOR_TEST_URL=http://127.0.0.1:8000/editor/ node editor/tests/shapes.cjs
 EDITOR_TEST_URL=http://127.0.0.1:8000/editor/ node editor/tests/shape-style.cjs
+EDITOR_TEST_URL=http://127.0.0.1:8000/editor/ node editor/tests/region.cjs
 ```
 
 可用 `CHROMIUM_PATH` 指定浏览器路径。检查实际文字像素边界、换行和缩放、两种框选方式、多选操作、原图尺寸导入、导出尺寸和刷新恢复。

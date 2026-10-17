@@ -86,6 +86,7 @@ const base = process.env.EDITOR_TEST_URL || 'http://127.0.0.1:8011/editor/';
     const shape = original.layers.find(l => l.type === 'shape');
     const shapes = [100, 300].map((x, i) => ({ ...structuredClone(shape), id: `shape-${i}`, x, y: 100, w: 100, h: 100, rotation: 0, shape: 'rect', locked: false, visible: true }));
     await open({ ...fixture, layers: shapes });
+    await page.locator('#marqueeTool').click();
     await page.locator('#marqueeMode').selectOption('intersect');
     await draw(110, 110, 390, 190);
     assert.equal(await page.locator('#inspector .inspector-header span').textContent(), '2 个元素');
