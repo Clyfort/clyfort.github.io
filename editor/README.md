@@ -12,7 +12,7 @@ python3 -m http.server 8000 --bind 127.0.0.1 --directory /workspace/clyfort.gith
 
 ## 功能
 
-- 图形：选择矩形、圆角矩形、圆形、三角形、直线或箭头工具后，在画布按住鼠标拖动确定位置与尺寸；Shift 等比绘制或限定线条角度，Esc 取消。支持反向拖动和斜向箭头；填充、渐变、描边、圆角与阴影。
+- 图形：选择矩形、圆角矩形、圆形、三角形、直线、块状箭头或线条箭头工具后，在画布按住鼠标拖动确定位置与尺寸；Shift 等比绘制或限定线条角度，Esc 取消。默认黑色空心，可在属性面板启用填充；箭头有块状和「直线 + V 形箭头」两种。支持反向拖动和斜向箭头；填充、渐变、描边、圆角与阴影。
 - 自由画笔：颜色、粗细，可作为独立图层移动与缩放。
 - 文字：高度根据实际字形和换行自动计算，角点拖动等比缩放文字；字体、字号、字重、斜体、下划线、删除线、行距、字距、段距、对齐；选中右侧文字内容中的片段可单独设置样式。
 - 字体导入：TTF、OTF、WOFF、WOFF2。字体内嵌保存到项目。
@@ -39,6 +39,7 @@ Ctrl/⌘ + Z 撤销、Shift + Z 重做、D 复制图层、S 保存项目；方�
 ```sh
 EDITOR_TEST_URL=http://127.0.0.1:8000/editor/ node editor/tests/regressions.cjs
 EDITOR_TEST_URL=http://127.0.0.1:8000/editor/ node editor/tests/shapes.cjs
+EDITOR_TEST_URL=http://127.0.0.1:8000/editor/ node editor/tests/shape-style.cjs
 ```
 
 可用 `CHROMIUM_PATH` 指定浏览器路径。检查实际文字像素边界、换行和缩放、两种框选方式、多选操作、原图尺寸导入、导出尺寸和刷新恢复。

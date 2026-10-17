@@ -25,6 +25,7 @@ with ZipFile(output, 'w', ZIP_DEFLATED) as archive:
         '图绎（Figlyph）图片编辑器\n\n'
         '解压后安装 Python 3，运行 start.py 自动打开编辑器。\n'
         '选择基础图形后，在画布按住鼠标拖动确定位置和大小；Shift 等比绘制或限定角度，Esc 取消。\n'
+        '基础图形默认黑色空心，可在属性面板启用填充。箭头有块状、线条加 V 形两种。\n'
         'M 框选，Ctrl+A 全选，Shift+点击增减选择。文字输入框内 Ctrl+A 只选文字。\n'
         '图片导入保留原始像素尺寸，文字框高度自动适配内容。\n'
         '使用「文件 → 保存项目文件」备份 .figlyph 项目；也能打开旧版 .shiguang 文件。\n'
