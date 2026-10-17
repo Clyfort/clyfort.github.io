@@ -44,10 +44,11 @@ const assert = require('node:assert/strict');
     await page.locator('[data-shape="rect"]').click(); await draw(30, 30, 80, 90);
     await page.locator('#undo').click(); assert.equal((await state()).layers.length, 6);
     await page.locator('#redo').click(); assert.equal((await state()).layers.length, 7);
-    // Palette color applies to the next shape, not the canvas background.
+    // Outline colors remain editable through object properties.
     const background = (await state()).background;
-    await page.locator('[data-shape="rect"]').click(); await page.locator('[data-color="#344c3e"]').click(); await draw(20, 250, 80, 300);
-    doc = await state(); assert.equal(doc.background, background); assert.equal(doc.layers.at(-1).fill, '#344c3e');
+    await page.locator('[data-shape="rect"]').click(); await draw(20, 250, 80, 300);
+    await page.locator('[data-prop="stroke"]').fill('#344c3e');
+    doc = await state(); assert.equal(doc.background, background); assert.equal(doc.layers.at(-1).stroke, '#344c3e');
     // Project names use the new extension; legacy files and existing browser storage still open.
     await page.locator('#projectMenu').click(); let wait = page.waitForEvent('download'); await page.locator('#saveProject').click(); let file = await wait;
     assert(file.suggestedFilename().endsWith('.figlyph')); const savedFile = await file.path();
