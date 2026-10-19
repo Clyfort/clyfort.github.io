@@ -25,3 +25,5 @@
 .brand-mark{background:transparent}.brand-mark img{display:block;width:38px;height:38px}
 
 .text-range-overlay{display:none;position:absolute;pointer-events:none;z-index:4;transform-origin:center}.text-range-overlay span{position:absolute;background:#4285f440;border-bottom:2px solid #4285f4;pointer-events:none}
+
+#inlineText{white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-all;font-kerning:none;font-variant-ligatures:none;cursor:text}#inlineText span{white-space:inherit}#inlineText::selection,#inlineText *::selection{background:#4285f450}

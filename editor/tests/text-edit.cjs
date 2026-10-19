@@ -35,7 +35,7 @@ const assert = require('node:assert/strict');
     await page.locator('#zoomIn').click(); await page.locator('#viewport').hover(); await page.mouse.wheel(0, 10);
     document = await state(); await doubleClick(document.layers.find(l => l.id === title.id));
     await page.locator('#inlineText').press('Control+a');
-    assert.equal(await page.locator('#inlineText').evaluate(el => el.selectionEnd - el.selectionStart), '点击框外完成编辑'.length);
+    assert.equal(await page.locator('#inlineText').evaluate(() => window.getSelection().toString().length), '点击框外完成编辑'.length);
     await page.locator('#inlineText').press('Escape');
     // Box selection mode must not accidentally start text editing.
     await page.locator('#marqueeTool').click(); document = await state(); await doubleClick(document.layers.find(l => l.id === title.id));
