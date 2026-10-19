@@ -16,6 +16,7 @@ python3 -m http.server 8000 --bind 127.0.0.1 --directory /workspace/clyfort.gith
 - 自由画笔：颜色、粗细，可作为独立图层移动与缩放。
 - 文字：点击添加文字或按 T 后，在画布单击确定位置并开始输入，Esc 可取消放置；清空全部文字（或仅剩空白）并确认后自动删除文本框，支持撤销。在选择工具下双击画布文字框内任意位置即可直接编辑，点击框外或按 Ctrl/⌘+Enter 完成；高度根据实际字形和换行自动计算，角点拖动等比缩放文字；字体、字号、字重、斜体、下划线、删除线、行距、字距、段距、对齐；选中右侧文字内容中的片段可单独设置样式。
 - 文字样式记忆：普通“添加文字”沿用最近使用的字体、字号、粗体、斜体、下划线、删除线、颜色、行距、字距、段距和对齐方式，在当前浏览器中刷新后仍保留；大标题、副标题、正文预设明确采用各自的字号和粗体设置，其他样式继续沿用。
+- 局部文字样式：在画布文字编辑框或右侧文字内容中选中片段后，直接调整字体、字号、颜色、粗体等设置；切换设置和面板刷新会保留选区，继续修改时仍只作用于该片段。
 - 字体导入：TTF、OTF、WOFF、WOFF2。字体内嵌保存到项目。
 - 图片：文件上传、拖放、粘贴，取景裁切、翻转、亮度、对比度与饱和度。导入时保留原始像素宽高；空画布直接匹配原图尺寸，已有作品按需扩展画布并保留原图层，预览缩放不影响导出分辨率。
 - 对象：拖动、角点缩放、旋转、画布对齐；Shift + 拖动角点保持比例。
@@ -46,6 +47,7 @@ EDITOR_TEST_URL=http://127.0.0.1:8000/editor/ node editor/tests/region.cjs
 EDITOR_TEST_URL=http://127.0.0.1:8000/editor/ node editor/tests/text-edit.cjs
 EDITOR_TEST_URL=http://127.0.0.1:8000/editor/ node editor/tests/text-placement.cjs
 EDITOR_TEST_URL=http://127.0.0.1:8000/editor/ node editor/tests/text-style.cjs
+EDITOR_TEST_URL=http://127.0.0.1:8000/editor/ node editor/tests/text-range.cjs
 ```
 
 可用 `CHROMIUM_PATH` 指定浏览器路径。检查实际文字像素边界、换行和缩放、两种框选方式、多选操作、原图尺寸导入、导出尺寸和刷新恢复。
