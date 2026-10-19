@@ -23,3 +23,5 @@
 .text-place-active{cursor:text}.text-place-active .drawing-hint{display:block}
 
 .brand-mark{background:transparent}.brand-mark img{display:block;width:38px;height:38px}
+
+.text-range-overlay{display:none;position:absolute;pointer-events:none;z-index:4;transform-origin:center}.text-range-overlay span{position:absolute;background:#4285f440;border-bottom:2px solid #4285f4;pointer-events:none}
