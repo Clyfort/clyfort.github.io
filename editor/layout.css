@@ -1,0 +1,25 @@
+.layout-target{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:12px 0;font-size:10px;color:#7d8678}
+.layout-target select{max-width:130px;min-width:0;padding:6px;border:1px solid #e1e5d9;border-radius:4px;background:#fff;font:inherit}
+.layout-align{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:10px}
+.layout-align button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:44px;padding:5px 2px;font-size:9px;color:#77836d;border:1px solid #e9eae3;border-radius:5px}
+.layout-align svg{width:16px;height:16px}
+.layout-align button:hover,.layout-distribute button:hover{background:var(--accent-soft);color:#a96b50}
+.layout-distribute{display:flex;gap:6px;margin:10px 0}
+.layout-distribute button{flex:1;min-width:0;padding:9px 2px;border:1px solid #e1e5d9;border-radius:5px;font-size:10px}
+.layout-align button:disabled,.layout-distribute button:disabled{opacity:.4;cursor:default;background:transparent;color:#77836d}
+.layout-align button:focus-visible,.layout-distribute button:focus-visible{outline:2px solid #456449;outline-offset:2px}
+.image-layout-buttons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+.image-layout-buttons button{min-width:0;min-height:34px;padding:6px 2px;border:1px solid #e1e5d9;border-radius:5px;font-size:10px}
+.image-layout-buttons button:hover{background:var(--accent-soft)}
+.image-layout-buttons button:disabled{opacity:.4;cursor:default;background:transparent}
+.image-layout-buttons button:focus-visible{outline:2px solid #456449;outline-offset:2px}
+.layer-search{display:flex;align-items:center;gap:4px;border:1px solid #e1e5d9;border-radius:6px;padding:5px 7px;background:#fff}
+.layer-search input{min-width:0;width:100%;border:0;outline:0;padding:5px 0;font:inherit;font-size:11px;background:transparent}
+.layer-search:focus-within{outline:1px solid #c98867}
+.layer-search button{padding:2px 4px;color:#86917c;font-size:18px;line-height:1}
+.layer-row[hidden],#layerSearchEmpty[hidden]{display:none}
+.layer-name-input{width:100%;min-width:0;padding:9px;border:1px solid #e1e5d9;border-radius:5px;background:#fff;font:inherit;font-size:11px}
+.layer-name-input:focus{outline:1px solid #c98867}
+.layer-name-input:disabled{opacity:.5}
+.layer-order{flex-wrap:wrap}.layer-order button{min-width:40%;display:flex;align-items:center;justify-content:center;gap:5px}
+.layer-order button svg{width:13px;height:13px}

@@ -50,7 +50,7 @@ export function replaceStyledRange(layer,start,end,replacement){
  const local={...(layer.charStyles?.[start]||{})},delta=replacement.length-(end-start),styles={};
  for(const [key,style]of Object.entries(layer.charStyles||{})){const index=Number(key);if(index<start)styles[index]={...style};else if(index>=end)styles[index+delta]={...style};}
  if(Object.keys(local).length){let index=start;for(const ch of replacement){styles[index]={...local};index+=ch.length;}}
- layer.text=layer.text.slice(0,start)+replacement+layer.text.slice(end);layer.charStyles=styles;layer.name=layer.text.replace(/\n/g,' ').slice(0,30)||'文字';
+ layer.text=layer.text.slice(0,start)+replacement+layer.text.slice(end);layer.charStyles=styles;if(!layer.customName)layer.name=layer.text.replace(/\n/g,' ').slice(0,30)||'文字';
  return {start,end:start+replacement.length};
 }
 
