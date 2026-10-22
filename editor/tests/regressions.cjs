@@ -18,7 +18,7 @@ const base = process.env.EDITOR_TEST_URL || 'http://127.0.0.1:8011/editor/';
     const original = await state();
     const text = structuredClone(original.layers.find(layer => layer.type === 'text'));
     const fixture = { ...original, width: 1000, height: 1000, background: '#ffffff', fonts: [], layers: [text] };
-    Object.assign(text, { x: 100, y: 100, w: 650, h: 10, text: '写下你的灵感\nÁgjf pq', fontSize: 94, fill: '#000000', stroke: '#000000', strokeWidth: 2, opacity: 1, shadow: 0, rotation: 0, bold: false, italic: true, underline: true, strike: true, lineHeight: .6, letterSpacing: -2, charStyles: { 0: { fontSize: 130, italic: true } } });
+    Object.assign(text, { autoWidth:false, x: 100, y: 100, w: 650, h: 10, text: '写下你的灵感\nÁgjf pq', fontSize: 94, fill: '#000000', stroke: '#000000', strokeWidth: 2, opacity: 1, shadow: 0, rotation: 0, bold: false, italic: true, underline: true, strike: true, lineHeight: .6, letterSpacing: -2, charStyles: { 0: { fontSize: 130, italic: true } } });
     const open = async document => {
       await page.locator('#projectInput').setInputFiles({ name: 'regression.shiguang', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(document)) });
       await page.waitForTimeout(600);

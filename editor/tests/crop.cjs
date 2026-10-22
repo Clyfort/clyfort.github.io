@@ -1,0 +1,24 @@
+const {chromium}=require('playwright'),assert=require('node:assert/strict');
+(async()=>{
+ const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',args:['--no-sandbox']});
+ try{
+  const page=await browser.newPage({viewport:{width:1440,height:1000},acceptDownloads:true}),errors=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.goto(process.env.EDITOR_TEST_URL||'http://127.0.0.1:8011/editor/');await page.waitForFunction(()=>localStorage.getItem('shiguang-studio-project-v1'));
+  const fixture=await page.evaluate(()=>{const doc=JSON.parse(localStorage.getItem('shiguang-studio-project-v1')),image=doc.layers.find(l=>l.type==='image'),shape=doc.layers.find(l=>l.type==='shape'),c=document.createElement('canvas');c.width=500;c.height=400;const ctx=c.getContext('2d');ctx.fillStyle='#0000ff';ctx.fillRect(0,0,500,400);ctx.fillStyle='#ff0000';ctx.fillRect(100,50,200,150);Object.assign(image,{x:0,y:0,w:500,h:400,rotation:0,radius:0,topRound:false,shadow:0,src:c.toDataURL(),brightness:100,contrast:100,saturation:100,locked:true});doc.width=500;doc.height=400;doc.layers=[image,{...shape,id:'outside',x:800,y:900,w:20,h:20,visible:false}];return doc;});
+  const state=async()=>{await page.waitForTimeout(400);return page.evaluate(()=>JSON.parse(localStorage.getItem('shiguang-studio-project-v1')));};
+  await page.locator('#projectInput').setInputFiles({name:'crop.figlyph',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(fixture))});await state();
+  const draw=async(x1,y1,x2,y2,shift=false)=>{const r=await page.locator('#artboard').boundingBox(),doc=await state(),sx=r.width/doc.width,sy=r.height/doc.height;await page.mouse.move(r.x+x1*sx,r.y+y1*sy);if(shift)await page.keyboard.down('Shift');await page.mouse.down();await page.mouse.move(r.x+x2*sx,r.y+y2*sy,{steps:8});await page.mouse.up();if(shift)await page.keyboard.up('Shift');};
+  await page.locator('#cropTool').click();assert(await page.locator('[data-action="crop-region"]').isDisabled());await draw(300,200,100,50);assert.equal(await page.locator('[data-region="w"]').inputValue(),'200');assert.equal(await page.locator('[data-region="h"]').inputValue(),'150');assert.equal((await state()).width,500,'preview must not change the document');
+  await page.keyboard.press('Enter');let doc=await state();assert.equal(doc.width,200);assert.equal(doc.height,150);assert.equal(doc.layers.length,fixture.layers.length);assert.equal(doc.layers[0].x,-100);assert.equal(doc.layers[0].y,-50);assert.equal(doc.layers[0].locked,true);assert.equal(doc.layers[1].x,700);assert.equal(doc.layers[1].y,850);
+  assert.deepEqual(await page.locator('#artboard').evaluate(c=>[...c.getContext('2d').getImageData(100,75,1,1).data]),[255,0,0,255]);
+  await page.locator('#undo').click();doc=await state();assert.equal(doc.width,500);assert.deepEqual(doc.layers,fixture.layers);await page.locator('#redo').click();await state();
+  await page.locator('#exportButton').click();const pending=page.waitForEvent('download');await page.locator('#downloadImage').click();const file=await pending,bytes=require('node:fs').readFileSync(await file.path());const dimensions=await page.evaluate(async base64=>{const im=new Image();im.src='data:image/png;base64,'+base64;await im.decode();return [im.width,im.height];},bytes.toString('base64'));assert.deepEqual(dimensions,[200,150]);
+  await page.reload();assert.equal((await state()).width,200);assert(await page.locator('#undo').isDisabled()); // Reload starts a new history.
+  assert.equal((await state()).width,200);
+  await page.locator('#cropTool').click();await draw(10,10,80,50,true);assert.equal(await page.locator('[data-region="w"]').inputValue(),await page.locator('[data-region="h"]').inputValue());await page.keyboard.press('Escape');assert.equal((await state()).width,200);assert(!(await page.locator('#regionSelection').isVisible()));
+  await page.locator('#cropTool').click();await draw(10,10,150,100);await page.locator('[data-region="w"]').fill('80');await page.locator('[data-region="w"]').press('Enter');assert.equal((await state()).width,80,'Enter from a numeric crop field applies the latest edit');
+  await page.setViewportSize({width:390,height:844});await page.locator('#cropTool').click();await draw(5,5,60,50);await page.locator('#propertiesToggle').click();await page.locator('[data-action="crop-region"]').click();assert.equal((await state()).width,55);
+  await page.setViewportSize({width:320,height:740});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=320),'small-screen toolbar fits');
+  assert.deepEqual(errors,[]);console.log('PASS: reversed crop preview, keyboard/precise fields, pixel preservation, hidden and locked layers retained, undo/redo, export/reload, Shift square, cancel and mobile.');
+ }finally{await browser.close();}
+})().catch(e=>{console.error(e);process.exitCode=1;});

@@ -16,7 +16,8 @@ const assert = require('node:assert/strict');
     const doubleClick = async (layer, empty = true) => {
       const r = await page.locator('#artboard').boundingBox(), z = r.width / document.width;
       // The right side is blank inside this wide text frame, not over an actual glyph.
-      const x = empty ? layer.x + layer.w - 20 : layer.x + 30, y = layer.y + layer.h / 3;
+      const tail=layer.x+layer.w-20;
+      const x = empty && tail<document.width ? tail : layer.x + Math.min(30,layer.w/2), y = layer.y + layer.h / 3;
       const angle = layer.rotation * Math.PI / 180, dx = x - layer.x - layer.w/2, dy = y - layer.y - layer.h/2;
       await page.mouse.dblclick(r.x + (layer.x + layer.w/2 + dx*Math.cos(angle)-dy*Math.sin(angle))*z, r.y + (layer.y + layer.h/2 + dx*Math.sin(angle)+dy*Math.cos(angle))*z);
     };

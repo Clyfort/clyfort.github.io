@@ -1,0 +1,24 @@
+const {chromium}=require('playwright'),assert=require('node:assert/strict');
+const type='application/x-figlyph-layers+json';
+(async()=>{
+ const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',args:['--no-sandbox']});
+ try{
+  const page=await browser.newPage({viewport:{width:1440,height:1100}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.goto(process.env.EDITOR_TEST_URL||'http://127.0.0.1:8011/editor/');await page.waitForFunction(()=>localStorage.getItem('shiguang-studio-project-v1'));
+  const state=async()=>{await page.waitForTimeout(400);return page.evaluate(()=>JSON.parse(localStorage.getItem('shiguang-studio-project-v1')));};
+  const original=await state();await page.locator('[data-panel="layers"]').click();const textId=original.layers.find(l=>l.type==='text').id;await page.locator(`[data-layer="${textId}"]`).click();
+  await page.locator('#layerName').fill('Reusable title');await page.locator('#layerName').press('Enter');await state();await page.locator('#artboard').focus();
+  const copied=await page.evaluate(type=>{const data=new DataTransfer(),event=new ClipboardEvent('copy',{clipboardData:data,bubbles:true,cancelable:true});document.querySelector('#artboard').dispatchEvent(event);return {encoded:data.getData(type),plain:data.getData('text/plain'),prevented:event.defaultPrevented};},type);
+  assert(copied.prevented);assert.equal(copied.plain,'Reusable title');const payload=JSON.parse(copied.encoded);assert.equal(payload.layers.length,1);assert.equal(payload.layers[0].name,'Reusable title');assert.equal(payload.layers[0].customName,true);
+  const paste=async data=>page.locator('#artboard').evaluate((el,{type,data})=>{const transfer=new DataTransfer();for(const [mime,value]of Object.entries(data))transfer.setData(mime,value);const event=new ClipboardEvent('paste',{clipboardData:transfer,bubbles:true,cancelable:true});el.dispatchEvent(event);return event.defaultPrevented;},{type,data});
+  await paste({[type]:copied.encoded});let doc=await state(),clone=doc.layers.at(-1);assert.equal(doc.layers.length,original.layers.length+1);assert.notEqual(clone.id,textId);assert.equal(clone.x,payload.layers[0].x+24);assert.equal(clone.name,'Reusable title');assert.deepEqual(clone.charStyles,payload.layers[0].charStyles);
+  await page.locator('#undo').click();assert.equal((await state()).layers.length,original.layers.length);await page.locator('#redo').click();await state();
+  await paste({'text/plain':'<b>Plain text</b>\nsecond line'});doc=await state();assert.equal(doc.layers.at(-1).text,'<b>Plain text</b>\nsecond line');assert.equal(await page.locator('b').filter({hasText:'Plain text'}).count(),0);
+  const before=doc.layers.length;await paste({[type]:'{"version":1,"layers":[{"type":"image","src":"https://evil.example/image.png"}]}'});assert.equal((await state()).layers.length,before);await paste({'text/plain':'x'.repeat(10001)});assert.equal((await state()).layers.length,before);
+  await page.locator('[data-prop="text"]').focus();const handled=await page.locator('[data-prop="text"]').evaluate(el=>{const data=new DataTransfer();data.setData('text/plain','native input');const event=new ClipboardEvent('paste',{clipboardData:data,bubbles:true,cancelable:true});el.dispatchEvent(event);return event.defaultPrevented;});assert.equal(handled,false,'native input paste remains available');assert.equal((await state()).layers.length,before);
+  await page.locator('#artboard').focus();assert.equal(await page.locator('#artboard').evaluate(el=>{const event=new KeyboardEvent('keydown',{key:'v',code:'KeyV',ctrlKey:true,bubbles:true,cancelable:true});el.dispatchEvent(event);return event.defaultPrevented;}),false,'Ctrl+V must allow the native paste event');
+  await page.locator('#artboard').evaluate(async el=>{const c=document.createElement('canvas');c.width=10;c.height=10;c.getContext('2d').fillRect(0,0,10,10);const blob=await new Promise(resolve=>c.toBlob(resolve));const data=new DataTransfer();data.items.add(new File([blob],'external.png',{type:'image/png'}));el.dispatchEvent(new ClipboardEvent('paste',{clipboardData:data,bubbles:true,cancelable:true}));});
+  doc=await state();assert.equal(doc.layers.length,before+1,'external image paste adds only the image, without a stale copied layer');assert.equal(doc.layers.at(-1).type,'image');
+  await page.reload();assert.equal((await state()).layers.length,before+1);assert.deepEqual(errors,[]);console.log('PASS: native layer copy/paste, custom names and rich styles, unique IDs, undo/redo, plain text, native input behavior, invalid/oversized payloads, external image precedence and reload. Synthetic clipboard events do not change the system clipboard.');
+ }finally{await browser.close();}
+})().catch(e=>{console.error(e);process.exitCode=1;});

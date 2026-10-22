@@ -23,3 +23,10 @@
 .layer-name-input:disabled{opacity:.5}
 .layer-order{flex-wrap:wrap}.layer-order button{min-width:40%;display:flex;align-items:center;justify-content:center;gap:5px}
 .layer-order button svg{width:13px;height:13px}
+.crop-active{cursor:crosshair}
+.crop-active .region-selection{background:transparent;border-color:#f3f0e5;box-shadow:0 0 0 20000px #1c2b2466}
+.crop-active .region-selection::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,transparent 33.1%,#ffffff80 33.1%,#ffffff80 33.5%,transparent 33.5%,transparent 66.4%,#ffffff80 66.4%,#ffffff80 66.8%,transparent 66.8%),linear-gradient(to bottom,transparent 33.1%,#ffffff80 33.1%,#ffffff80 33.5%,transparent 33.5%,transparent 66.4%,#ffffff80 66.4%,#ffffff80 66.8%,transparent 66.8%)}
+@media(max-width:480px){.workspace:has(.crop-active) .canvas-size{display:none}}
+@media(max-width:360px){.workspace-toolbar .tool-button{width:23px}.workspace-toolbar .tiny-divider{display:none}}
+#inlineText[data-auto-width=true]{white-space:pre;overflow-wrap:normal;word-break:normal}
+.ai-controls{grid-template-columns:1fr}
