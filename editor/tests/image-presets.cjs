@@ -1,0 +1,62 @@
+const {chromium}=require('playwright');
+const assert=require('node:assert/strict');
+(async()=>{
+ const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',args:['--no-sandbox']});
+ try{
+  const page=await browser.newPage({viewport:{width:1440,height:960},acceptDownloads:true});
+  const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.goto(process.env.EDITOR_TEST_URL||'http://127.0.0.1:8011/editor/');
+  await page.waitForFunction(()=>document.querySelector('#artboard').width>0&&localStorage.getItem('shiguang-studio-project-v1'));
+  const fixture=await page.evaluate(()=>{
+   const key='shiguang-studio-project-v1',doc=JSON.parse(localStorage.getItem(key));
+   const c=document.createElement('canvas');c.width=300;c.height=200;const ctx=c.getContext('2d');
+   ctx.fillStyle='#c84020';ctx.fillRect(0,0,150,200);ctx.fillStyle='#2080c0';ctx.fillRect(150,0,150,200);
+   const image=doc.layers.find(l=>l.type==='image');
+   Object.assign(image,{x:0,y:0,w:300,h:200,src:c.toDataURL(),brightness:100,contrast:100,saturation:100,opacity:1,radius:0,topRound:false,rotation:0,shadow:0,cropX:35,cropY:60,flipX:false,flipY:false});
+   doc.width=300;doc.height=200;doc.layers=[image];return JSON.stringify(doc);
+  });
+  await page.locator('#projectInput').setInputFiles({name:'image-presets.figlyph',mimeType:'application/json',buffer:Buffer.from(fixture)});
+  await page.waitForFunction(()=>document.querySelector('#artboard').width===300);
+  await page.locator('[data-panel="layers"]').click();await page.locator('[data-layer]').click();
+  const state=async()=>{await page.waitForTimeout(400);return page.evaluate(()=>JSON.parse(localStorage.getItem('shiguang-studio-project-v1')));};
+  const pixel=()=>page.locator('#artboard').evaluate(c=>[...c.getContext('2d').getImageData(75,100,1,1).data]);
+  const original=(await state()).layers[0];await page.waitForFunction(()=>document.querySelector('#artboard').getContext('2d').getImageData(75,100,1,1).data[0]===200);
+  assert.equal(await page.locator('[data-image-preset]').count(),8);
+  assert.equal(await page.locator('[data-image-preset="original"]').getAttribute('aria-pressed'),'true');
+  await page.locator('[data-image-preset="mono"]').click();let doc=await state();
+  assert.equal(doc.layers[0].saturation,0);const gray=await pixel();assert.equal(gray[0],gray[1]);assert.equal(gray[1],gray[2]);
+  assert.equal(await page.locator('[data-prop="saturation"]').inputValue(),'0');
+  await page.locator('#undo').click();assert.deepEqual((await state()).layers[0],original);
+  assert.deepEqual(await pixel(),[200,64,32,255]);
+  await page.locator('#redo').click();assert.equal((await state()).layers[0].saturation,0);
+  await page.locator('[data-image-preset="vivid"]').click();const vivid=(await state()).layers[0];
+  await page.locator('[data-image-preset="mono"]').click();await state();await page.locator('[data-image-preset="vivid"]').click();
+  assert.deepEqual((await state()).layers[0],vivid,'switches set adjustments without stacking');
+  await page.locator('[data-image-preset="vivid"]').press('Enter');await state();await page.locator('#undo').click();
+  assert.equal((await state()).layers[0].saturation,0,'reapplying the same preset adds no undo step');
+  await page.locator('[data-prop="brightness"]').evaluate(el=>{el.value=103;el.dispatchEvent(new Event('input',{bubbles:true}));});
+  assert.equal(await page.locator('[data-image-preset][aria-pressed="true"]').count(),0,'custom adjustments clear the active preset immediately');
+  await page.locator('[data-prop="brightness"]').dispatchEvent('change');await state();
+  await page.locator('[data-image-preset="original"]').click();assert.deepEqual((await state()).layers[0],original,'original resets only color adjustments');
+  await page.locator('[data-action="toggle-lock"]').click();await state();assert.equal(await page.locator('[data-image-preset]:disabled').count(),8);
+  await page.locator('[data-action="toggle-lock"]').click();await state();
+  await page.locator('[data-image-preset="mono"]').click();await state();await page.reload();
+  await page.locator('[data-panel="layers"]').click();await page.locator('[data-layer]').click();
+  assert.equal(await page.locator('[data-image-preset="mono"]').getAttribute('aria-pressed'),'true');
+  await page.locator('#exportButton').click();const pending=page.waitForEvent('download');await page.locator('#downloadImage').click();
+  const download=await pending;const bytes=require('node:fs').readFileSync(await download.path());
+  const exported=await page.evaluate(async base64=>{
+   const img=new Image();img.src='data:image/png;base64,'+base64;await img.decode();
+   const c=document.createElement('canvas');c.width=img.width;c.height=img.height;const ctx=c.getContext('2d');ctx.drawImage(img,0,0);
+   return {width:img.width,height:img.height,pixel:[...ctx.getImageData(75,100,1,1).data]};
+  },bytes.toString('base64'));
+  assert.equal(exported.width,300);assert.equal(exported.height,200);assert.deepEqual(exported.pixel,await pixel(),'export matches the filtered canvas');
+  await page.setViewportSize({width:390,height:844});await page.locator('#propertiesToggle').click();
+  await page.locator('[data-image-preset="soft"]').click();assert.equal((await state()).layers[0].brightness,112);
+  const boxes=await page.evaluate(()=>['.image-presets','#inspector'].map(selector=>{const r=document.querySelector(selector).getBoundingClientRect();return {left:r.left,right:r.right};}));
+  assert(boxes[0].left>=boxes[1].left&&boxes[0].right<=boxes[1].right,'mobile presets fit inside the properties panel');
+  if(process.env.EDITOR_SCREENSHOT)await page.screenshot({path:process.env.EDITOR_SCREENSHOT});
+  assert.deepEqual(errors,[]);
+  console.log('PASS: eight previews, grayscale pixels, undo/redo, no stacking, custom sliders, original reset, locked images, keyboard, reload, exported pixels and mobile.');
+ }finally{await browser.close();}
+})().catch(error=>{console.error(error);process.exitCode=1;});

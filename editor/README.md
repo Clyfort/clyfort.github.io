@@ -21,6 +21,7 @@ python3 -m http.server 8000 --bind 127.0.0.1 --directory /workspace/clyfort.gith
 - AI 文字助手：翻译（中英日韩等 9 种目标语言）、润色、精简、生成 3 条海报标题。可处理画布选中的文字、整个文本框或手动输入的文字；先预览和编辑，再替换原文选区或新增文字图层；支持撤销与重做。
 - 字体导入：TTF、OTF、WOFF、WOFF2。字体内嵌保存到项目。
 - 图片：文件上传、拖放、粘贴，取景裁切、翻转、亮度、对比度与饱和度。导入时保留原始像素宽高；空画布直接匹配原图尺寸，已有作品按需扩展画布并保留原图层，预览缩放不影响导出分辨率。
+- 图片滤镜：选中图片后，在属性面板查看原图、鲜活、柔光、淡雅、电影、黑白、明亮和浓郁 8 个缩略图预览；一键应用后仍可微调亮度、对比度与饱和度。滤镜直接设置这三个数值，重复切换不叠加；「原图」恢复色彩调整，保留裁切、翻转、尺寸和其他外观。支持撤销、重做、项目保存和导出，锁定图片须先解锁。
 - 对象：拖动、角点缩放、旋转、画布对齐；Shift + 拖动角点保持比例。
 - 多选：Ctrl/⌘ + A 选中所有可见且未锁定的元素；M 框选工具可从任意位置拖出选框，默认选中与框接触的元素，也可在工具栏切换为「完全包含」。选择工具也可从空白区域开始框选。Shift + 点击增减选择、Shift + 框选追加选择；所选元素可整体移动、复制、删除。文字输入框内的 Ctrl/⌘ + A 保持原生文字全选行为。
 - 系统字体：提供等线、微软雅黑选项，使用设备已安装的字体，未安装时回退到内置思源黑体；Satoshi 主要用于西文。支持自行导入字体文件。
@@ -63,6 +64,7 @@ EDITOR_TEST_URL=http://127.0.0.1:8000/editor/ node editor/tests/text-style.cjs
 EDITOR_TEST_URL=http://127.0.0.1:8000/editor/ node editor/tests/text-range.cjs
 EDITOR_TEST_URL=http://127.0.0.1:8000/editor/ node editor/tests/rich-text.cjs
 EDITOR_TEST_URL=http://127.0.0.1:8000/editor/ node editor/tests/ai-assistant.cjs
+EDITOR_TEST_URL=http://127.0.0.1:8000/editor/ node editor/tests/image-presets.cjs
 ```
 
 可用 `CHROMIUM_PATH` 指定浏览器路径。检查实际文字像素边界、换行和缩放、两种框选方式、多选操作、原图尺寸导入、导出尺寸和刷新恢复。
