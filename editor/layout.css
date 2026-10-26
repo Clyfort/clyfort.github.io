@@ -39,8 +39,12 @@ dialog.background-dialog{max-width:620px;max-height:calc(100dvh - 30px)}
 .background-actions{display:flex;gap:8px}.background-actions .button{flex:1;margin-top:0;font-size:12px}
 .background-actions [hidden]{display:none}
 
-#snapGuides{position:absolute;inset:0;pointer-events:none;z-index:4;overflow:visible}.snap-guide{position:absolute;border:0 solid #df6487;pointer-events:none}#snapToggle{font-size:10px;width:38px;white-space:nowrap}#snapToggle[aria-pressed=true]{background:#f4e5dc;color:#a5593f;border-radius:4px}
+#snapGuides{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:4;overflow:hidden}.snap-guide{stroke:#df6487;stroke-width:1;stroke-linecap:butt;vector-effect:non-scaling-stroke;shape-rendering:crispEdges;pointer-events:none}#snapToggle{font-size:10px;width:38px;white-space:nowrap}#snapToggle[aria-pressed=true]{background:#f4e5dc;color:#a5593f;border-radius:4px}
 
 .replace-image-button{width:100%;font-size:11px}
 
 .group-transform-row{display:flex;gap:6px;margin-top:8px}.group-transform-row .field{flex:1;min-width:0}.group-transform-row .button{font-size:10px;padding:6px 9px}
+
+#customExportSize[hidden],#exportQualityGroup[hidden]{display:none}
+
+.color-control .pick-color{width:25px;height:25px;flex-shrink:0;padding:4px;border-radius:4px}.pick-color svg{width:16px;height:16px}.color-pick-active{cursor:crosshair}.color-pick-active .drawing-hint{display:block}.color-sample{position:absolute;display:flex;align-items:center;gap:7px;z-index:9;padding:7px 9px;background:white;border:1px solid #e1e5d9;border-radius:6px;box-shadow:0 3px 12px #28362f22;pointer-events:none}.color-sample[hidden]{display:none}.color-sample span{width:18px;height:18px;border:1px solid #ddd;border-radius:3px}.color-sample code{font-size:11px;color:#28362f}
