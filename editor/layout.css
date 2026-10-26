@@ -38,3 +38,9 @@ dialog.background-dialog{max-width:620px;max-height:calc(100dvh - 30px)}
 .background-status{min-height:32px;font-size:11px;line-height:1.6;color:#718567}
 .background-actions{display:flex;gap:8px}.background-actions .button{flex:1;margin-top:0;font-size:12px}
 .background-actions [hidden]{display:none}
+
+#snapGuides{position:absolute;inset:0;pointer-events:none;z-index:4;overflow:visible}.snap-guide{position:absolute;border:0 solid #df6487;pointer-events:none}#snapToggle{font-size:10px;width:38px;white-space:nowrap}#snapToggle[aria-pressed=true]{background:#f4e5dc;color:#a5593f;border-radius:4px}
+
+.replace-image-button{width:100%;font-size:11px}
+
+.group-transform-row{display:flex;gap:6px;margin-top:8px}.group-transform-row .field{flex:1;min-width:0}.group-transform-row .button{font-size:10px;padding:6px 9px}
