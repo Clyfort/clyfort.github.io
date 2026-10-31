@@ -1,0 +1,9 @@
+.life-briefing{max-width:860px;margin:0 auto;padding:clamp(20px,4vw,44px);border-radius:18px;background:var(--background-color-transparent-80);box-shadow:var(--redefine-box-shadow);overflow-wrap:anywhere}
+.life-briefing h1{font-size:clamp(1.6rem,4vw,2.2rem);line-height:1.45;margin:0 0 12px}
+.life-briefing .briefing-meta{color:var(--third-text-color);font-size:.92rem;padding-bottom:24px;border-bottom:1px solid var(--border-color)}
+.life-briefing h2{font-size:1.35rem;line-height:1.6;margin:36px 0 18px;scroll-margin-top:100px}
+.life-briefing .briefing-body p{font-size:1rem;line-height:1.95;text-indent:2em;margin:0 0 18px}
+.life-briefing .briefing-body .briefing-source{text-indent:0;font-size:.9rem;color:var(--third-text-color);padding-bottom:24px;border-bottom:1px solid var(--border-color)}
+.life-briefing nav{margin:24px 0;padding:16px 20px;background:var(--second-background-color);border-radius:10px}
+.life-briefing nav a{display:block;margin:8px 0;line-height:1.6}
+@media print{.navbar-container,.main-content-footer,.right-side-tools-container,.progress-bar-container,.life-briefing nav{display:none!important}.life-briefing{box-shadow:none;padding:0;max-width:none}}
