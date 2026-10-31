@@ -32,99 +32,28 @@ export default function initBriefing() {
   window.addEventListener("resize", onScroll);
   updateCurrent();
 
-  const section = page.querySelector("#briefing-comments");
-  const list = section.querySelector("[data-comment-list]");
-  const status = section.querySelector("[data-comment-status]");
-  const count = section.querySelector("[data-comment-count]");
-  const refresh = section.querySelector("[data-comments-refresh]");
-  const more = section.querySelector("[data-comments-more]");
-  const controller = new AbortController();
-  const endpoint = "https://api.github.com/repos/Clyfort/clyfort.github.io/issues/1/comments";
-  let nextPage = 1;
-  let loaded = 0;
-  let busy = false;
   let disposed = false;
-  function renderComment(comment) {
-    const card = document.createElement("article");
-    card.className = "briefing-comment-card";
-    const header = document.createElement("header");
-    const avatar = document.createElement("img");
-    const login = comment.user?.login || "GitHub 用户";
-    const avatarUrl = new URL(comment.user?.avatar_url || "https://github.com/identicons/anonymous.png");
-    if (avatarUrl.protocol === "https:") avatar.src = avatarUrl.href;
-    avatar.alt = "";
-    avatar.loading = "lazy";
-    avatar.referrerPolicy = "no-referrer";
-    const byline = document.createElement("div");
-    const author = document.createElement("a");
-    author.className = "comment-author";
-    author.textContent = login;
-    author.href = "https://github.com/" + encodeURIComponent(login);
-    author.target = "_blank";
-    author.rel = "noopener noreferrer";
-    const time = document.createElement("time");
-    time.dateTime = comment.created_at;
-    time.textContent = new Date(comment.created_at).toLocaleString("zh-CN", {hour12: false});
-    byline.append(author, time);
-    header.append(avatar, byline);
-    const body = document.createElement("div");
-    body.className = "briefing-comment-body";
-    body.textContent = comment.body || "";
-    card.append(header, body);
-    return card;
+  let instance;
+  const section = page.querySelector("#briefing-comments");
+  const mount = section.querySelector("#waline");
+  const status = section.querySelector("[data-waline-status]");
+  if (!document.querySelector('link[data-waline-style]')) {
+    const style = document.createElement("link");
+    style.rel = "stylesheet";
+    style.href = "https://unpkg.com/@waline/client@v3/dist/waline.css";
+    style.dataset.walineStyle = "";
+    document.head.append(style);
   }
-  async function load(reset = false) {
-    if (busy || disposed) return;
-    busy = true;
-    refresh.disabled = true;
-    more.disabled = true;
-    const pageNumber = reset ? 1 : nextPage;
-    status.hidden = false;
-    status.textContent = "正在加载评论…";
-    let timeout;
-    const request = new AbortController();
-    const abort = () => request.abort();
-    controller.signal.addEventListener("abort", abort, {once: true});
-    try {
-      timeout = setTimeout(abort, 15000);
-      const response = await fetch(endpoint + "?per_page=100&page=" + pageNumber, {
-        headers: {Accept: "application/vnd.github+json"},
-        signal: request.signal,
-        credentials: "omit"
-      });
-      if (!response.ok) throw new Error("HTTP " + response.status);
-      const comments = await response.json();
-      if (!Array.isArray(comments)) throw new Error("Invalid comments response");
+  import("https://unpkg.com/@waline/client@v3/dist/waline.js")
+    .then(({init}) => {
       if (disposed) return;
-      if (reset) {list.replaceChildren(); loaded = 0;}
-      const fragment = document.createDocumentFragment();
-      comments.forEach(comment => fragment.append(renderComment(comment)));
-      list.append(fragment);
-      loaded += comments.length;
-      count.textContent = loaded ? "(" + loaded + ")" : "";
-      nextPage = pageNumber + 1;
-      more.hidden = !(response.headers.get("link") || "").includes('rel="next"');
-      status.textContent = loaded ? "" : "暂无评论，欢迎发表第一条评论。";
-      status.hidden = loaded > 0;
-    } catch (error) {
-      if (!disposed) {
-        status.hidden = false;
-        status.textContent = "评论暂时无法加载，请点击刷新，或前往 GitHub 查看评论。";
-      }
-    } finally {
-      clearTimeout(timeout);
-      controller.signal.removeEventListener("abort", abort);
-      busy = false;
-      refresh.disabled = false;
-      more.disabled = false;
-    }
-  }
-  refresh.addEventListener("click", () => load(true));
-  more.addEventListener("click", () => load());
-  load(true);
+      instance = init({el: mount, serverURL: "https://clybio.vercel.app", path: "/2026/11/01/life-sciences-briefing/", lang: "zh-CN", meta: ["nick"], requiredMeta: ["nick"], dark: ".dark-mode"});
+      status.hidden = true;
+    })
+    .catch(() => { if (!disposed) status.textContent = "评论组件加载失败，请刷新页面重试。"; });
   cleanup = () => {
     disposed = true;
-    controller.abort();
+    if (instance) instance.destroy();
     window.removeEventListener("scroll", onScroll);
     window.removeEventListener("resize", onScroll);
     cancelAnimationFrame(frame);
