@@ -38,3 +38,15 @@
 @media(max-width:900px){.briefing-layout{grid-template-columns:minmax(0,1fr)}.briefing-aside{position:static;max-height:none;grid-row:1;background:var(--second-background-color);border-radius:12px;padding:18px 20px}.briefing-toc-title{margin-bottom:10px}.briefing-toc-links a{padding-top:6px;padding-bottom:6px}}
 @media(max-width:640px){.page-container .main-content-container .main-content-body .main-content.briefing-page{width:calc(100% - 24px);margin-top:18px}.briefing-layout{gap:20px}.life-briefing,.briefing-comments{padding:22px 18px;border-radius:12px}.life-briefing h2{font-size:1.2rem}.briefing-comments{margin-top:20px}.briefing-comment-welcome{padding:18px}.briefing-comment-submit{font-size:.88rem}}
 @media print{.navbar-container,.main-content-footer,.right-side-tools-container,.progress-bar-container,.briefing-aside,.briefing-comments{display:none!important}.page-container .main-content-container .main-content-body .main-content.briefing-page{width:100%;max-width:none}.briefing-layout{display:block}.life-briefing{box-shadow:none;padding:0;max-width:none}}
+
+/* Article download cards */
+.briefing-download{margin:-6px 0 28px}
+.briefing-download-card{display:flex;align-items:center;gap:16px;padding:18px 20px;border:1px solid var(--border-color);border-left:4px solid var(--primary-color);border-radius:14px;background:linear-gradient(120deg,var(--second-background-color),var(--background-color-transparent-80));color:var(--text-color)!important;text-decoration:none!important;box-shadow:0 5px 18px rgba(20,30,55,.07);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.briefing-download-card:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(20,30,55,.12);border-color:var(--primary-color)}
+.briefing-download-card:focus-visible{outline:3px solid var(--primary-color);outline-offset:3px}
+.briefing-download-icon{display:grid;place-items:center;flex:0 0 48px;width:48px;height:48px;border-radius:12px;background:color-mix(in srgb,var(--primary-color) 12%,transparent);color:var(--primary-color);font-size:1.35rem}
+.briefing-download-copy{display:flex;flex:1;min-width:0;flex-direction:column;gap:5px}
+.briefing-download-copy strong{font-size:1rem;line-height:1.5}
+.briefing-download-copy>span{color:var(--third-text-color);font-size:.84rem;line-height:1.5}
+.briefing-download-action{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;background:var(--primary-color);color:#fff;font-size:.88rem;font-weight:600;white-space:nowrap}
+@media(max-width:600px){.briefing-download-card{gap:12px;padding:14px}.briefing-download-icon{flex-basis:42px;width:42px;height:42px}.briefing-download-action{padding:9px 10px;font-size:.8rem}.briefing-download-copy strong{font-size:.92rem}}
