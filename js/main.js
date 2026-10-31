@@ -1,5 +1,6 @@
 /* main function */
 import initUtils from "./utils.js";
+import initBriefing from "./layouts/briefing.js";
 import initTyped from "./plugins/typed.js";
 import initModeToggle from "./tools/lightDarkSwitch.js";
 import initLazyLoad from "./layouts/lazyload.js";
@@ -45,6 +46,7 @@ export const main = {
   },
   refresh: () => {
     initUtils();
+    initBriefing();
     initModeToggle();
     initScrollTopBottom();
     if (
