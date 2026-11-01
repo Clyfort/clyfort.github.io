@@ -30,4 +30,5 @@ jobs:
       - name: Confirm generated home page and briefing
         run: |
           test -s blog-source/public/index.html
-          test -s blog-source/public/2026/11/01/life-sciences-briefing/index.html
+          find blog-source/public -type f -name index.html -print
+          grep -Rql "心肌乳酸直接进入线粒体" blog-source/public
