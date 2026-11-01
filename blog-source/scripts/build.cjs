@@ -1,3 +1,4 @@
+const fs = require("node:fs");
 const path = require("node:path");
 
 const siteRoot = path.resolve(__dirname, "..");
@@ -8,8 +9,18 @@ const hexo = new Hexo(siteRoot, {});
 
 async function build() {
   await hexo.init();
+  const themeDir = hexo.theme_dir || path.join(siteRoot, "themes", hexo.config.theme);
+  console.log("Hexo project diagnostics:", JSON.stringify({
+    baseDir: hexo.base_dir,
+    theme: hexo.config.theme,
+    themeDir,
+    themeExists: fs.existsSync(themeDir),
+    layoutExists: fs.existsSync(path.join(themeDir, "layout")),
+    postFiles: fs.readdirSync(path.join(siteRoot, "source", "_posts"))
+  }));
   await hexo.call("clean");
   await hexo.call("generate");
+  console.log("Generated root entries:", fs.readdirSync(path.join(siteRoot, "public")));
   await hexo.exit();
 }
 
