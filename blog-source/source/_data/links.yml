@@ -1,0 +1,7 @@
+- links_category: 友情链接
+  has_thumbnail: false
+  list:
+    - name: Pretharp's Blog
+      link: https://pretharp.github.io
+      description: 一只蝾螈
+      avatar: https://cdn.luogu.com.cn/upload/image_hosting/tvspc4jx.png
