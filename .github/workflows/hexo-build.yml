@@ -1,27 +1,31 @@
-name: Build Hexo site
+name: Build and deploy Hexo site
 
 on:
   pull_request:
     branches: [main]
     paths:
       - "blog-source/**"
-      - "vercel.json"
       - ".github/workflows/hexo-build.yml"
   push:
     branches: [main]
     paths:
       - "blog-source/**"
-      - "vercel.json"
       - ".github/workflows/hexo-build.yml"
+  workflow_dispatch:
 
 permissions:
   contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -30,5 +34,21 @@ jobs:
       - name: Confirm generated home page and briefing
         run: |
           test -s blog-source/public/index.html
-          find blog-source/public -type f -name index.html -print
           grep -Rql "心肌乳酸直接进入线粒体" blog-source/public
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: blog-source/public
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
