@@ -56,3 +56,15 @@
 .briefing-download-card:active .briefing-download-action,
 .briefing-download-card:hover .briefing-download-action i,
 .briefing-download-card:active .briefing-download-action i{color:#fff!important}
+
+/* Light blue theme for article download cards. */
+.briefing-download-card{border-left-color:#78afe0;background:linear-gradient(120deg,#f2f8fe,#fff)}
+.briefing-download-card:hover{border-color:#a9cfee}
+.briefing-download-icon{background:#e8f3fd;color:#5b9bd5}
+.briefing-download-action{background:#5b9bd5;color:#fff!important}
+.briefing-download-action i{color:#fff!important}
+.briefing-download-card:hover .briefing-download-action,
+.briefing-download-card:active .briefing-download-action{background:#4d8fc8;color:#fff!important}
+.briefing-download-card:hover .briefing-download-action i,
+.briefing-download-card:active .briefing-download-action i{color:#fff!important}
+.briefing-download-card:hover .briefing-download-copy>span{color:#64748b}
