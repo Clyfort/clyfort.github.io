@@ -4,11 +4,10 @@
   "private": true,
   "scripts": {
     "prebuild": "node scripts/prepare-assets.cjs",
-    "build": "hexo --cwd blog-source clean && hexo --cwd blog-source generate"
+    "build": "node scripts/build.cjs"
   },
   "dependencies": {
     "hexo": "7.3.0",
-    "hexo-cli": "4.3.2",
     "hexo-generator-archive": "2.0.0",
     "hexo-generator-category": "2.0.0",
     "hexo-generator-index": "4.0.0",
