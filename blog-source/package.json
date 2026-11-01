@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "prebuild": "node scripts/prepare-assets.cjs",
-    "build": "hexo clean && hexo generate"
+    "build": "hexo --cwd blog-source clean && hexo --cwd blog-source generate"
   },
   "dependencies": {
     "hexo": "7.3.0",
