@@ -194,6 +194,9 @@
   };
   toggle.addEventListener("click", () => setOpen(panel.hidden));
   close.addEventListener("click", () => setOpen(false));
+  document.addEventListener("pointerdown", (event) => {
+    if (!widget.contains(event.target) && !panel.hidden) setOpen(false);
+  });
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && !panel.hidden) setOpen(false);
   });
