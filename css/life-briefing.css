@@ -50,3 +50,9 @@
 .briefing-download-copy>span{color:var(--third-text-color);font-size:.84rem;line-height:1.5}
 .briefing-download-action{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;background:var(--primary-color);color:#fff;font-size:.88rem;font-weight:600;white-space:nowrap}
 @media(max-width:600px){.briefing-download-card{gap:12px;padding:14px}.briefing-download-icon{flex-basis:42px;width:42px;height:42px}.briefing-download-action{padding:9px 10px;font-size:.8rem}.briefing-download-copy strong{font-size:.92rem}}
+
+/* Keep the download label readable against the accent button on hover. */
+.briefing-download-card:hover .briefing-download-action,
+.briefing-download-card:active .briefing-download-action,
+.briefing-download-card:hover .briefing-download-action i,
+.briefing-download-card:active .briefing-download-action i{color:#fff!important}
