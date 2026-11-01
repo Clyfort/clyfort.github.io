@@ -85,9 +85,9 @@ navbar:
     Friends:
       path: /links/
       icon: fa-solid fa-link
-search:
-  enable: false
-  preload: true
+  search:
+    enable: false
+    preload: true
 home:
   sidebar:
     enable: true
@@ -105,7 +105,7 @@ home:
         path: /categories/
         icon: fa-regular fa-folder
   article_date_format: YYYY-MM-DD
-  excerpt_length: 100
+  excerpt_length: 200
   categories:
     enable: true
     limit: 5
