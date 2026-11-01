@@ -1,0 +1,12 @@
+.briefing-body h2{font-size:1.35rem;line-height:1.6;margin:36px 0 18px;scroll-margin-top:110px}
+.briefing-body p{font-size:1rem;line-height:1.95;text-indent:2em;margin:0 0 18px}
+.briefing-body .briefing-source{text-indent:0;font-size:.9rem;color:var(--third-text-color);padding-bottom:24px;border-bottom:1px solid var(--border-color)}
+.briefing-download{margin:18px 0 28px}
+.briefing-download-card{box-sizing:border-box;display:flex;align-items:center;gap:16px;padding:16px 18px;border:1px solid rgba(117,164,207,.28);border-radius:16px;background:linear-gradient(135deg,rgba(235,245,255,.94),rgba(249,252,255,.98));color:var(--text-color,#30445b);text-decoration:none;box-shadow:0 8px 24px rgba(51,94,138,.08);transition:transform .18s ease,box-shadow .18s ease}
+.briefing-download-card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(51,94,138,.14);color:var(--text-color,#30445b)}
+.briefing-download-icon{flex:0 0 44px;width:44px;height:44px;display:grid;place-items:center;border-radius:12px;background:#e0efff;color:#4782bd;font-size:1.35rem}
+.briefing-download-copy{display:flex;flex:1;min-width:0;flex-direction:column;gap:4px}
+.briefing-download-copy strong{font-size:.98rem;line-height:1.5}
+.briefing-download-copy>span{color:var(--third-text-color);font-size:.84rem;line-height:1.5}
+.briefing-download-action{display:inline-flex;align-items:center;gap:7px;flex:0 0 auto;color:#4b82b7;font-size:.86rem;white-space:nowrap}
+@media(max-width:640px){.briefing-download-card{gap:11px;padding:13px}.briefing-download-action{font-size:0}.briefing-download-action i{font-size:1rem}}

@@ -1,0 +1,185 @@
+info:
+  title: ClyBio
+  subtitle: "Nothing in biology makes sense except in the light of evolution."
+  author: Clyfort
+  url: https://clybio.vercel.app
+defaults:
+  favicon: https://cdn.luogu.com.cn/upload/image_hosting/tvspc4jx.png
+  logo: https://cdn.luogu.com.cn/upload/image_hosting/tvspc4jx.png
+  avatar: https://cdn.luogu.com.cn/upload/image_hosting/tvspc4jx.png
+colors:
+  primary: "#A31F34"
+  secondary:
+global:
+  content_max_width: 1000px
+  sidebar_width: 210px
+  hover:
+    shadow: true
+    scale: true
+  scroll_progress:
+    bar: true
+    percentage: true
+  website_counter:
+    url: https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js
+    enable: true
+    site_pv: true
+    site_uv: true
+    post_pv: true
+  single_page: true
+  preloader:
+    enable: false
+  side_tools:
+    gear_rotation: true
+    auto_expand: false
+  open_graph:
+    enable: true
+    image: https://cdn.luogu.com.cn/upload/image_hosting/tvspc4jx.png
+    description: "ClyBio：生命科学、演化生物学与生物信息学"
+home_banner:
+  enable: true
+  style: fixed
+  image:
+    light: /images/wallhaven-wqery6-light.webp
+    dark: /images/wallhaven-wqery6-dark.webp
+  title: ClyBio
+  subtitle:
+    text:
+      - "Nothing in biology makes sense except in the light of evolution."
+    hitokoto:
+      enable: false
+      show_author: false
+      api: https://v1.hitokoto.cn
+    typing_speed: 100
+    backing_speed: 80
+    starting_delay: 500
+    backing_delay: 1500
+    loop: true
+    smart_backspace: true
+  text_color:
+    light: "#fff"
+    dark: "#d1d1b6"
+  text_style:
+    title_size: 3.8rem
+    subtitle_size: 1.4rem
+    line_height: 1.5
+  custom_font:
+    enable: false
+  social_links:
+    enable: true
+    style: default
+    links:
+      - icon: github
+        url: https://github.com/Clyfort
+      - icon: email
+        url: mailto:1830152258@qq.com
+    qrs: []
+navbar:
+  auto_hide: true
+  color:
+    left: "#f78736"
+    right: "#367df7"
+    transparency: 25
+  links:
+    Home:
+      path: /
+      icon: fa-regular fa-house
+    Friends:
+      path: /links/
+      icon: fa-solid fa-link
+  search:
+    enable: false
+    preload: true
+home:
+  sidebar:
+    enable: true
+    position: left
+    first_item: menu
+    announcement: "生命科学简报每周更新，欢迎生物组同学阅读。"
+    show_on_mobile: true
+    links:
+      Archives:
+        path: /archives/
+        icon: fa-regular fa-archive
+      Tags:
+        path: /tags/
+        icon: fa-regular fa-tags
+      Categories:
+        path: /categories/
+        icon: fa-regular fa-folder
+  article_date_format: YYYY-MM-DD
+  excerpt_length: 200
+  categories:
+    enable: true
+    limit: 5
+  tags:
+    enable: true
+    limit: 5
+articles:
+  style:
+    font_size: 18px
+    line_height: 1.65
+    image_border_radius: 16px
+    image_alignment: center
+    image_caption: false
+    link_icon: true
+    title_alignment: left
+  word_count:
+    enable: true
+    count: true
+    min2read: true
+  author_label:
+    enable: true
+    auto: false
+    list:
+      - "Ayaka's Dog"
+  code_block:
+    copy: true
+    style: mac
+    font:
+      enable: false
+  toc:
+    enable: true
+    max_depth: 3
+    number: false
+    expand: true
+    init_open: true
+  copyright:
+    enable: true
+    default: all_rights_reserved
+  lazyload: true
+  recommendation:
+    enable: false
+comment:
+  enable: false
+footer:
+  runtime: true
+  icon: '<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>'
+  start: 2023/10/11 12:20:00
+  statistics: true
+  customize: "每周更新生命科学研究简报。"
+  icp:
+    enable: false
+inject:
+  enable: true
+  head:
+    - '<link rel="stylesheet" href="/css/clybio-briefing.css">'
+  footer: []
+plugins:
+  feed:
+    enable: false
+  aplayer:
+    enable: false
+    type: fixed
+    audios: []
+  mermaid:
+    enable: false
+    version: "11.4.1"
+    theme:
+      light: default
+      dark: dark
+page_templates:
+  friends_column: 2
+  tags_style: blur
+  masonry:
+    batch_size: 12
+    initial_batch_size: 24

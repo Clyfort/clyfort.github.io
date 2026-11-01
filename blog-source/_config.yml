@@ -1,0 +1,18 @@
+title: ClyBio
+subtitle: "Nothing in biology makes sense except in the light of evolution."
+description: "ClyBio：生命科学、演化生物学与生物信息学"
+author: Clyfort
+language: zh-CN
+timezone: Asia/Shanghai
+url: https://clybio.vercel.app
+root: /
+permalink: ":year/:month/:day/:title/"
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+new_post_name: :title.md
+default_layout: post
+future: true
+theme: redefine
