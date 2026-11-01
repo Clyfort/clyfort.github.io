@@ -9,8 +9,8 @@
       --clybio-player-ink: #24364b;
       position: fixed;
       z-index: 9998;
-      right: 24px;
-      bottom: 92px;
+      right: 88px;
+      bottom: 24px;
       font-family: inherit;
       color: var(--clybio-player-ink);
     }
@@ -134,10 +134,15 @@
     }
     @media (max-width: 640px) {
       #clybio-music-widget {
-        right: 16px;
-        bottom: calc(78px + env(safe-area-inset-bottom, 0px));
+        left: 16px;
+        right: auto;
+        bottom: calc(16px + env(safe-area-inset-bottom, 0px));
       }
-      #clybio-music-panel { bottom: 58px; }
+      #clybio-music-panel {
+        left: 0;
+        right: auto;
+        bottom: 58px;
+      }
     }
     @media (prefers-reduced-motion: reduce) {
       #clybio-music-toggle { transition: none; }
