@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "npm --prefix blog-source install",
+  "buildCommand": "npm --prefix blog-source run build",
+  "outputDirectory": "blog-source/public"
+}
