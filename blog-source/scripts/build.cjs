@@ -5,7 +5,7 @@ const siteRoot = path.resolve(__dirname, "..");
 process.chdir(siteRoot);
 
 const Hexo = require("hexo");
-const hexo = new Hexo(siteRoot, { config: "_config.yml" });
+const hexo = new Hexo(siteRoot, { config: path.join(siteRoot, "_config.yml") });
 
 async function build() {
   await hexo.init();
@@ -14,6 +14,9 @@ async function build() {
     baseDir: hexo.base_dir,
     configFile: hexo.config_path,
     configExists: fs.existsSync(path.join(siteRoot, "_config.yml")),
+    title: hexo.config.title,
+    url: hexo.config.url,
+    sourceDir: hexo.config.source_dir,
     theme: hexo.config.theme,
     themeDir,
     themeExists: fs.existsSync(themeDir),
