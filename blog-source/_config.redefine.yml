@@ -2,7 +2,7 @@ info:
   title: ClyBio
   subtitle: "Nothing in biology makes sense except in the light of evolution."
   author: Clyfort
-  url: https://clybio.vercel.app
+  url: https://clyfort.github.io
 defaults:
   favicon: https://cdn.luogu.com.cn/upload/image_hosting/tvspc4jx.png
   logo: https://cdn.luogu.com.cn/upload/image_hosting/tvspc4jx.png
@@ -20,7 +20,7 @@ global:
     bar: true
     percentage: true
   website_counter:
-    url: https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js
+    url: https://cn.vercount.one/js
     enable: true
     site_pv: true
     site_uv: true
@@ -51,7 +51,7 @@ home_banner:
       api: https://v1.hitokoto.cn
     typing_speed: 100
     backing_speed: 80
-    starting_delay: 500
+    starting_delay: 0
     backing_delay: 1500
     loop: true
     smart_backspace: true
@@ -72,7 +72,6 @@ home_banner:
         url: https://github.com/Clyfort
       - icon: email
         url: mailto:1830152258@qq.com
-    qrs: []
 navbar:
   auto_hide: true
   color:
@@ -86,15 +85,14 @@ navbar:
     Friends:
       path: /links/
       icon: fa-solid fa-link
-  search:
-    enable: false
-    preload: true
+search:
+  enable: false
+  preload: true
 home:
   sidebar:
     enable: true
     position: left
     first_item: menu
-    announcement: "生命科学简报每周更新，欢迎生物组同学阅读。"
     show_on_mobile: true
     links:
       Archives:
@@ -107,7 +105,7 @@ home:
         path: /categories/
         icon: fa-regular fa-folder
   article_date_format: YYYY-MM-DD
-  excerpt_length: 200
+  excerpt_length: 100
   categories:
     enable: true
     limit: 5
