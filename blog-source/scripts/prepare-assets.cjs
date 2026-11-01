@@ -10,3 +10,10 @@ for (const name of ["images", "downloads", "editor", "fonts", "fontawesome", "we
   const to = path.join(sourceRoot, name);
   if (fs.existsSync(from)) fs.cpSync(from, to, { recursive: true, force: true });
 }
+
+const themeSource = path.join(siteRoot, "node_modules", "hexo-theme-redefine");
+const themeTarget = path.join(siteRoot, "themes", "redefine");
+if (!fs.existsSync(themeSource)) {
+  throw new Error("hexo-theme-redefine is missing; install dependencies before building.");
+}
+fs.cpSync(themeSource, themeTarget, { recursive: true, force: true });
