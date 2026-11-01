@@ -1,9 +1,9 @@
 const path = require("node:path");
-const Hexo = require("hexo");
 
 const siteRoot = path.resolve(__dirname, "..");
 process.chdir(siteRoot);
 
+const Hexo = require("hexo");
 const hexo = new Hexo(siteRoot, {});
 
 async function build() {
