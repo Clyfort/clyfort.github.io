@@ -8,7 +8,7 @@ tags:
   - 生命科学简报
   - 演化生物学
 comments: false
-excerpt: "研究显示，心肌线粒体可通过 MCT1 直接摄取乳酸，并由基质中的 LDHB 氧化；这条通路在心脏应对损伤时尤为重要。 | “There is grandeur in this view of life...” — Charles Darwin, On the Origin of Species (1859)."
+excerpt: "\"There is grandeur in this view of life...\" — Charles Darwin, On the Origin of Species (1859)."
 ---
 
 <div class="briefing-body">
