@@ -10,3 +10,20 @@
 .briefing-download-copy>span{color:var(--third-text-color);font-size:.84rem;line-height:1.5}
 .briefing-download-action{display:inline-flex;align-items:center;gap:7px;flex:0 0 auto;color:#4b82b7;font-size:.86rem;white-space:nowrap}
 @media(max-width:640px){.briefing-download-card{gap:11px;padding:13px}.briefing-download-action{font-size:0}.briefing-download-action i{font-size:1rem}}
+
+/* Keep the banner quotation visible even if the typewriter script stalls. */
+#subtitle {
+  font-size: 0 !important;
+  font-style: normal !important;
+}
+#subtitle::before {
+  content: "Nothing in biology makes sense except in the light of evolution.";
+  font-size: 1.4rem;
+}
+.typed-cursor {
+  display: none !important;
+}
+/* The theme merges its sample email into the configured two links. */
+.social-contacts .social-contact-item:nth-of-type(n + 3) {
+  display: none !important;
+}
