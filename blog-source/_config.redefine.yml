@@ -160,7 +160,7 @@ footer:
 inject:
   enable: true
   head:
-    - '<link rel="stylesheet" href="/css/clybio-briefing.css">'
+    - '<link rel="stylesheet" href="/css/clybio-briefing.css?v=20261102b">'
   footer: []
 plugins:
   feed:
