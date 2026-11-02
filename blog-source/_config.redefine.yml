@@ -154,14 +154,14 @@ footer:
   icon: '<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>'
   start: 2023/10/11 12:20:00
   statistics: true
-  customize: "每周更新生命科学研究简报。"
   icp:
     enable: false
 inject:
   enable: true
   head:
     - '<link rel="stylesheet" href="/css/clybio-briefing.css?v=20261102b">'
-  footer: []
+  footer:
+    - '<script src="/js/heart-surprise.js" defer></script>'
 plugins:
   feed:
     enable: false
