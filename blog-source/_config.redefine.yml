@@ -11,7 +11,7 @@ colors:
   primary: "#A31F34"
   secondary:
 global:
-  content_max_width: 1000px
+  content_max_width: 1200px
   sidebar_width: 210px
   hover:
     shadow: true
@@ -115,7 +115,7 @@ home:
 articles:
   style:
     font_size: 18px
-    line_height: 1.65
+    line_height: 1.8
     image_border_radius: 16px
     image_alignment: center
     image_caption: false
@@ -148,7 +148,14 @@ articles:
   recommendation:
     enable: false
 comment:
-  enable: false
+  enable: true
+  system: waline
+  config:
+    waline:
+      serverUrl: https://clybio.vercel.app
+      lang: zh-CN
+      emoji: []
+      reaction: false
 footer:
   runtime: true
   icon: '<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>'
