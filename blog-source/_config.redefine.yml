@@ -166,7 +166,7 @@ footer:
 inject:
   enable: true
   head:
-    - '<link rel="stylesheet" href="/css/clybio-briefing.css?v=20261102b">'
+    - '<link rel="stylesheet" href="/css/clybio-briefing.css?v=20261104a">'
   footer:
     - '<script src="/js/heart-surprise.js" defer></script>'
 plugins:

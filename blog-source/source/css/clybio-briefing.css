@@ -1,15 +1,20 @@
 .briefing-body h2{font-size:1.35rem;line-height:1.6;margin:36px 0 18px;scroll-margin-top:110px}
 .briefing-body p{font-size:1rem;line-height:1.95;text-indent:2em;margin:0 0 18px}
 .briefing-body .briefing-source{text-indent:0;font-size:.9rem;color:var(--third-text-color);padding-bottom:24px;border-bottom:1px solid var(--border-color)}
-.briefing-download{margin:18px 0 28px}
-.briefing-download-card{box-sizing:border-box;display:flex;align-items:center;gap:16px;padding:16px 18px;border:1px solid rgba(117,164,207,.28);border-radius:16px;background:linear-gradient(135deg,rgba(235,245,255,.94),rgba(249,252,255,.98));color:var(--text-color,#30445b);text-decoration:none;box-shadow:0 8px 24px rgba(51,94,138,.08);transition:transform .18s ease,box-shadow .18s ease}
-.briefing-download-card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(51,94,138,.14);color:var(--text-color,#30445b)}
-.briefing-download-icon{flex:0 0 44px;width:44px;height:44px;display:grid;place-items:center;border-radius:12px;background:#e0efff;color:#4782bd;font-size:1.35rem}
-.briefing-download-copy{display:flex;flex:1;min-width:0;flex-direction:column;gap:4px}
-.briefing-download-copy strong{font-size:.98rem;line-height:1.5}
-.briefing-download-copy>span{color:var(--third-text-color);font-size:.84rem;line-height:1.5}
-.briefing-download-action{display:inline-flex;align-items:center;gap:7px;flex:0 0 auto;color:#4b82b7;font-size:.86rem;white-space:nowrap}
-@media(max-width:640px){.briefing-download-card{gap:11px;padding:13px}.briefing-download-action{font-size:0}.briefing-download-action i{font-size:1rem}}
+.briefing-download{margin:24px 0 34px}
+.briefing-download-card{box-sizing:border-box;position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:center;gap:18px;padding:19px 20px;border:1px solid rgba(111,157,202,.34);border-radius:20px;background:linear-gradient(115deg,rgba(231,243,255,.98) 0%,rgba(249,252,255,.99) 58%,rgba(236,246,255,.98) 100%);color:#30445b;text-decoration:none;box-shadow:0 10px 28px rgba(43,82,122,.09),inset 0 1px 0 rgba(255,255,255,.9);transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+.briefing-download-card::before{content:"";position:absolute;z-index:-1;inset:0 auto 0 0;width:5px;background:linear-gradient(180deg,#65a7e8,#3979bd)}
+.briefing-download-card::after{content:"";position:absolute;z-index:-1;width:180px;height:180px;right:-75px;top:-100px;border-radius:50%;background:rgba(124,181,234,.12);pointer-events:none}
+.briefing-download-card:hover{transform:translateY(-3px);border-color:rgba(73,132,190,.58);box-shadow:0 16px 34px rgba(43,82,122,.15),inset 0 1px 0 rgba(255,255,255,.95);color:#30445b;text-decoration:none}
+.briefing-download-card:focus-visible{outline:3px solid rgba(65,132,198,.42);outline-offset:3px}
+.briefing-download-icon{flex:0 0 52px;width:52px;height:52px;display:grid;place-items:center;border:1px solid rgba(104,158,211,.18);border-radius:16px;background:linear-gradient(145deg,#e1f0ff,#cfe5fc);color:#3979b9;font-size:1.5rem;box-shadow:inset 0 1px 0 rgba(255,255,255,.9)}
+.briefing-download-copy{display:flex;flex:1;min-width:0;flex-direction:column;align-items:flex-start;gap:7px}
+.briefing-download-copy strong{max-width:100%;overflow-wrap:anywhere;color:#263d54;font-size:1.02rem;font-weight:650;line-height:1.55}
+.briefing-download-copy>span{display:inline-flex;align-items:center;max-width:100%;padding:4px 9px;border:1px solid rgba(115,159,199,.16);border-radius:999px;background:rgba(255,255,255,.64);color:#557089;font-size:.82rem;line-height:1.45;overflow-wrap:anywhere}
+.briefing-download-action{display:inline-flex;align-items:center;justify-content:center;gap:8px;flex:0 0 auto;margin-left:8px;padding:11px 15px;border:1px solid rgba(34,95,153,.14);border-radius:999px;background:linear-gradient(135deg,#347dbd,#2868a5);color:#fff;font-size:.88rem;font-weight:600;line-height:1.2;white-space:nowrap;box-shadow:0 5px 12px rgba(40,104,165,.18);transition:background .18s ease,box-shadow .18s ease}
+.briefing-download-card:hover .briefing-download-action{background:linear-gradient(135deg,#286fae,#205a91);color:#fff;box-shadow:0 7px 16px rgba(40,104,165,.24)}
+@media(max-width:640px){.briefing-download-card{display:grid;grid-template-columns:48px minmax(0,1fr);gap:12px;padding:15px 14px 15px 16px;border-radius:17px}.briefing-download-icon{width:48px;height:48px;flex-basis:48px;border-radius:14px}.briefing-download-copy{gap:6px}.briefing-download-copy strong{font-size:.96rem}.briefing-download-copy>span{font-size:.78rem}.briefing-download-action{grid-column:2;justify-self:start;margin:0;padding:9px 13px;font-size:.82rem}}
+@media(prefers-reduced-motion:reduce){.briefing-download-card,.briefing-download-action{transition:none}.briefing-download-card:hover{transform:none}}
 
 /* Keep the banner quotation visible even if the typewriter script stalls. */
 #subtitle {
